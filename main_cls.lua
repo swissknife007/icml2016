@@ -80,10 +80,10 @@ end
 
 
 local nc = 3
-local nz = opt.nz
-local ndf = opt.ndf
-local ngf = opt.ngf
-local real_label = 1
+local nz = opt.nz -- dimensions of the noise
+local ndf = opt.ndf -- number of discriminative filters in first convoluional layer
+local ngf = opt.ngf -- number of discriminative filters in first convoluional layer 
+local real_label = 1 
 local fake_label = 0
 
 local SpatialBatchNormalization = nn.SpatialBatchNormalization
@@ -91,10 +91,10 @@ local SpatialConvolution = nn.SpatialConvolution
 local SpatialFullConvolution = nn.SpatialFullConvolution
 
 if opt.init_g == '' then
-  fcG = nn.Sequential()
-  fcG:add(nn.Linear(opt.txtSize,opt.nt))
-  fcG:add(nn.LeakyReLU(0.2,true))
-  netG = nn.Sequential()
+  fcG = nn.Sequential() -- just an abstraction for the network
+  fcG:add(nn.Linear(opt.txtSize,opt.nt)) -- txtSize= 1024, opt.nt = 256 all text * number of text featurea - keras fully activations
+  fcG:add(nn.LeakyReLU(0.2,true)) - leaky 0.2 
+  netG = nn.Sequential() - 
   -- concat Z and txt
   ptg = nn.ParallelTable()
   ptg:add(nn.Identity())
